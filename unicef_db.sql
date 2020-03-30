@@ -134,11 +134,7 @@ CREATE TABLE `t_unicef_usractivity_copy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of t_unicef_usractivity_copy
--- ----------------------------
-
--- ----------------------------
 -- View structure for `module_attempt`
 -- ----------------------------
 DROP VIEW IF EXISTS `module_attempt`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`veativeuser`@`%` SQL SECURITY DEFINER VIEW `module_attempt` AS select `t_unicef_usractivity`.`GL_MODULE_NAME` AS `GL_MODULE_NAME`,count(`t_unicef_usractivity`.`GL_MODULE_NAME`) AS `COUNT` from `t_unicef_usractivity` group by `t_unicef_usractivity`.`GL_MODULE_NAME` ;
+CREATE VIEW `module_attempt` AS select `t_unicef_usractivity`.`GL_MODULE_NAME` AS `GL_MODULE_NAME`,count(`t_unicef_usractivity`.`GL_MODULE_NAME`) AS `COUNT` from `t_unicef_usractivity` group by `t_unicef_usractivity`.`GL_MODULE_NAME` ;
