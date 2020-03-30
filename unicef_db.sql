@@ -31,12 +31,12 @@ CREATE TABLE `t_unicef_user` (
   `IP_ADDRESS` varchar(15) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL COMMENT 'to track the user location',
   `CREATED_ON` datetime DEFAULT NULL,
   `LAST_UPDATED_BY` int(11) DEFAULT '0',
-  `LAST_UPDATED_ON` datetime DEFAULT '0000-00-00 00:00:00',
+  `LAST_UPDATED_ON` datetime DEFAULT NULL,
   PRIMARY KEY (`USER_OID`),
   UNIQUE KEY `UK_USR_EMAIL` (`EMAIL_ID`) USING BTREE,
   UNIQUE KEY `UK_USR_UNAME` (`USERNAME`) USING BTREE,
   KEY `USER_OID` (`USER_OID`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=515 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_unicef_user
@@ -73,7 +73,7 @@ CREATE TABLE `t_unicef_usractivity` (
   `ATTEMPTED_ON` datetime NOT NULL,
   PRIMARY KEY (`ACTIVITY_ID`),
   KEY `USER_OID` (`USER_OID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1692 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_unicef_usractivity
@@ -101,44 +101,10 @@ INSERT INTO `t_unicef_usractivity` VALUES ('71', '1', 'MS100027', 'Reproductive 
 INSERT INTO `t_unicef_usractivity` VALUES ('72', '1', 'MS100027', 'Reproductive Parts of a Flower', 'AS', 'Assess Your Knowledge', 'Conceptual Knowledge', 'Understand', 'Structure', 'Explore Strucure', 'Q7', 'Understand', 'Label', 'Multiple Choice Question', '1', '0', 'ec2-52-5-117-32', 'Firefox 68', 'NA', 'NA', 'NA', 'Desktop', '2019-07-07 14:48:43');
 INSERT INTO `t_unicef_usractivity` VALUES ('73', '1', 'MS100027', 'Reproductive Parts of a Flower', 'AS', 'Assess Your Knowledge', 'Conceptual Knowledge', 'Understand', 'Structure', 'Explore Strucure', 'Q8', 'Understand', 'Label', 'Multiple Choice Question', '1', '1', 'ec2-52-5-117-32', 'Firefox 68', 'NA', 'NA', 'NA', 'Desktop', '2019-07-07 14:48:54');
 INSERT INTO `t_unicef_usractivity` VALUES ('74', '1', 'MS100027', 'Reproductive Parts of a Flower', 'AS', 'Assess Your Knowledge', 'Conceptual Knowledge', 'Understand', 'Structure', 'Explore Strucure', 'Q9', 'Understand', 'Label', 'Multiple Choice Question', '1', '1', 'ec2-52-5-117-32', 'Firefox 68', 'NA', 'NA', 'NA', 'Desktop', '2019-07-07 14:50:03');
-
--- ----------------------------
--- Table structure for `t_unicef_usractivity_copy`
--- ----------------------------
-DROP TABLE IF EXISTS `t_unicef_usractivity_copy`;
-CREATE TABLE `t_unicef_usractivity_copy` (
-  `ACTIVITY_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `USER_OID` int(11) NOT NULL,
-  `GL_MODULE_ID` varchar(10) NOT NULL,
-  `GL_MODULE_NAME` varchar(100) NOT NULL,
-  `GL_LEVEL_ID` varchar(5) NOT NULL,
-  `GL_LEVEL_NAME` varchar(80) NOT NULL,
-  `GL_LEVEL_KNOWLEDGE_DOMAIN` varchar(50) NOT NULL,
-  `GL_LEVEL_COGNITIVE_DOMAIN` varchar(50) NOT NULL,
-  `GL_LEVEL_TYPE` varchar(50) NOT NULL,
-  `GL_LEVEL_INTERACTIVITY` varchar(50) NOT NULL,
-  `GL_QUESTION_ID` varchar(10) NOT NULL,
-  `GL_QUESTION_COGNITIVE` varchar(50) NOT NULL,
-  `GL_QUESTION_ACTION_VERB` varchar(50) NOT NULL,
-  `LL_QUESTION_TYPE` varchar(50) NOT NULL,
-  `LL_MAX_SCORE` tinyint(3) NOT NULL DEFAULT '1',
-  `TR_USER_SCORE` tinyint(3) NOT NULL,
-  `HOST_IP` varchar(15) DEFAULT NULL,
-  `DEVICE_BROWSER_VERSION` varchar(80) DEFAULT NULL,
-  `DEVICE_MODEL` varchar(50) DEFAULT NULL,
-  `DEVICE_KERNEL_VERSION` varchar(100) DEFAULT NULL,
-  `DEVICE_SERIAL_NUMBER` varchar(50) DEFAULT NULL,
-  `DEVICE_PLATFORM` varchar(20) NOT NULL,
-  `ATTEMPTED_ON` datetime NOT NULL,
-  PRIMARY KEY (`ACTIVITY_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_unicef_usractivity_copy
--- ----------------------------
+  
 
 -- ----------------------------
 -- View structure for `module_attempt`
 -- ----------------------------
 DROP VIEW IF EXISTS `module_attempt`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`veativeuser`@`%` SQL SECURITY DEFINER VIEW `module_attempt` AS select `t_unicef_usractivity`.`GL_MODULE_NAME` AS `GL_MODULE_NAME`,count(`t_unicef_usractivity`.`GL_MODULE_NAME`) AS `COUNT` from `t_unicef_usractivity` group by `t_unicef_usractivity`.`GL_MODULE_NAME` ;
+CREATE VIEW `module_attempt` AS select `t_unicef_usractivity`.`GL_MODULE_NAME` AS `GL_MODULE_NAME`,count(`t_unicef_usractivity`.`GL_MODULE_NAME`) AS `COUNT` from `t_unicef_usractivity` group by `t_unicef_usractivity`.`GL_MODULE_NAME` ;
