@@ -7,5 +7,6 @@ nbproject
 .idea
 .project
 .settings
+vendor
 composer.phar
 public/upload/3d-models/

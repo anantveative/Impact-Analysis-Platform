@@ -4,7 +4,7 @@ return array(
     'db' => array(
         // for primary db adapter that called
         'username' => 'root',
-        'password' => '',
+        'password' => 'root',
     ),
     'zf-mvc-auth' => array(
         'authentication' => array(
